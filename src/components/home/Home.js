@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import { Grid, Button, AppBar, Typography, Container } from "@material-ui/core";
 
 import styles from "./Home.styles";
 import AddPopUp from "./AddPopUp";
@@ -39,11 +37,18 @@ class Home extends Component {
 						/>
 					</ToolBar>
 				</AppBar>
-				{notebooks.length !== 0
-					? notebooks.map((notebook, index) => {
-							return <Notebook key={index} name={notebook} />;
-					  })
-					: "No notebooks"}
+
+				<Container className={classes.container}>
+					<Grid container item xs={12} spacing={4}>
+						{notebooks.length !== 0
+							? notebooks.map((notebook, index) => {
+									return (
+										<Notebook key={index} name={notebook} />
+									);
+							  })
+							: "No notebooks"}
+					</Grid>
+				</Container>
 			</div>
 		);
 	}

@@ -8,7 +8,7 @@ class App extends Component {
 
 		this.state = {
 			openAddNotebookDialog: false,
-			notebooks: [],
+			notebooks: ["notebook", "notebook1"],
 		};
 
 		this.openModal = this.openModal.bind(this);
