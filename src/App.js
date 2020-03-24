@@ -24,6 +24,7 @@ class App extends Component {
 			deleteNotebook: {},
 		};
 
+		this.generateId = this.generateId.bind(this);
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
 		this.addNotebook = this.addNotebook.bind(this);
@@ -46,9 +47,23 @@ class App extends Component {
 		});
 	};
 
+	generateId = () => {
+		let ids = [];
+		let largestId = 1;
+		if (this.state.notebooks.length !== 0) {
+			this.state.notebooks.map(notebook => {
+				ids.push(notebook.id);
+			});
+			largestId = Math.max(...ids);
+			return largestId + 1;
+		} else {
+			return largestId;
+		}
+	};
+
 	addNotebook = event => {
 		event.preventDefault();
-		let id = this.state.notebooks.length + 1;
+		let id = this.generateId();
 		let notebook = {};
 		notebook.id = id;
 		notebook.name = event.target.notebookName.value;
