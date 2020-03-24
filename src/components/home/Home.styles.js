@@ -9,9 +9,6 @@ export default {
 		height: 140,
 		width: 200,
 	},
-	media: {
-		height: 20,
-	},
 	content: {
 		padding: 20,
 	},

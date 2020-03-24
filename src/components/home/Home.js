@@ -16,6 +16,16 @@ class Home extends Component {
 			closeNotebookHandler,
 			notebooks,
 			addNotebook,
+			openEditDialog,
+			editState,
+			closeEditDialog,
+			editNotebook,
+			stateNotebook,
+			openDeleteDialog,
+			closeDeleteDialog,
+			delNotebook,
+			deleteNotebook,
+			deleteState,
 		} = this.props;
 
 		return (
@@ -41,9 +51,24 @@ class Home extends Component {
 				<Container className={classes.container}>
 					<Grid container item xs={12} spacing={4}>
 						{notebooks.length !== 0
-							? notebooks.map((notebook, index) => {
+							? notebooks.map(notebook => {
 									return (
-										<Notebook key={index} name={notebook} />
+										<Notebook
+											key={notebook.id}
+											notebook={notebook}
+											openEditDialog={openEditDialog}
+											closeEditDialog={closeEditDialog}
+											editState={editState}
+											editNotebook={editNotebook}
+											stateNotebook={stateNotebook}
+											openDeleteDialog={openDeleteDialog}
+											closeDeleteDialog={
+												closeDeleteDialog
+											}
+											delNotebook={delNotebook}
+											deleteNotebook={deleteNotebook}
+											deleteState={deleteState}
+										/>
 									);
 							  })
 							: "No notebooks"}
