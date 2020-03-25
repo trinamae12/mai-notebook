@@ -53,6 +53,7 @@ class App extends Component {
 		if (this.state.notebooks.length !== 0) {
 			this.state.notebooks.map(notebook => {
 				ids.push(notebook.id);
+				return ids;
 			});
 			largestId = Math.max(...ids);
 			return largestId + 1;
@@ -67,20 +68,14 @@ class App extends Component {
 		let notebook = {};
 		notebook.id = id;
 		notebook.name = event.target.notebookName.value;
-		this.setState(
-			prevState => ({
-				notebooks: [...prevState.notebooks, notebook],
-			}),
-			() => {
-				console.log(this.state.notebooks);
-			}
-		);
+		this.setState(prevState => ({
+			notebooks: [...prevState.notebooks, notebook],
+		}));
 
 		this.closeModal();
 	};
 
 	openEditDialog(notebook) {
-		console.log(notebook);
 		this.setState({
 			openEditDialog: true,
 			editNotebook: notebook,
@@ -125,11 +120,9 @@ class App extends Component {
 
 	deleteNotebook = (event, id) => {
 		event.preventDefault();
-		console.log("delete");
 		this.setState(prevState => {
 			prevState.notebooks.forEach((notebook, index) => {
 				if (notebook.id === id) {
-					console.log(index);
 					prevState.notebooks.splice(index, 1);
 				}
 			});
