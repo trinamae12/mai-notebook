@@ -5,7 +5,7 @@ import { Grid, Button, AppBar, Typography, Container } from "@material-ui/core";
 
 import styles from "./Home.styles";
 import AddPopUp from "./AddPopUp";
-import Notebook from "./Notebook";
+import Notebook from "../notebook/Notebook";
 
 class Home extends Component {
 	render() {
@@ -51,7 +51,7 @@ class Home extends Component {
 				<Container className={classes.container}>
 					<Grid container item xs={12} spacing={4}>
 						{notebooks.length !== 0
-							? notebooks.map(notebook => {
+							? notebooks.map((notebook) => {
 									return (
 										<Notebook
 											key={notebook.id}

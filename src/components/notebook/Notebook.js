@@ -13,9 +13,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { withStyles } from "@material-ui/core/styles";
 
-import styles from "./Home.styles";
+import styles from "../home/Home.styles";
 import EditNotebook from "./EditNotebook";
-import DeleteNotebook from "../DeleteNotebook";
+import DeleteNotebook from "./DeleteNotebook";
 
 class Notebook extends Component {
 	render() {
