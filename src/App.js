@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
 import Home from "./components/home/Home";
+import Notes from "./components/notes/Notes";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import NavBar from "./components/nav/NavBar";
 
 class App extends Component {
 	constructor(props) {
@@ -51,7 +54,7 @@ class App extends Component {
 		let ids = [];
 		let largestId = 1;
 		if (this.state.notebooks.length !== 0) {
-			this.state.notebooks.map(notebook => {
+			this.state.notebooks.map((notebook) => {
 				ids.push(notebook.id);
 				return ids;
 			});
@@ -62,13 +65,13 @@ class App extends Component {
 		}
 	};
 
-	addNotebook = event => {
+	addNotebook = (event) => {
 		event.preventDefault();
 		let id = this.generateId();
 		let notebook = {};
 		notebook.id = id;
 		notebook.name = event.target.notebookName.value;
-		this.setState(prevState => ({
+		this.setState((prevState) => ({
 			notebooks: [...prevState.notebooks, notebook],
 		}));
 
@@ -92,8 +95,8 @@ class App extends Component {
 	editNotebook = (event, id) => {
 		event.preventDefault();
 		let newName = event.target.notebookName.value;
-		this.setState(prevState => {
-			prevState.notebooks.forEach(notebook => {
+		this.setState((prevState) => {
+			prevState.notebooks.forEach((notebook) => {
 				if (notebook.id === id) {
 					notebook.name = newName;
 				}
@@ -120,7 +123,7 @@ class App extends Component {
 
 	deleteNotebook = (event, id) => {
 		event.preventDefault();
-		this.setState(prevState => {
+		this.setState((prevState) => {
 			prevState.notebooks.forEach((notebook, index) => {
 				if (notebook.id === id) {
 					prevState.notebooks.splice(index, 1);
@@ -133,25 +136,38 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="App">
-				<Home
-					openNotebookHandler={this.openModal}
-					closeNotebookHandler={this.closeModal}
-					open={this.state.openAddNotebookDialog}
-					notebooks={this.state.notebooks}
-					addNotebook={this.addNotebook}
-					editState={this.state.openEditDialog}
-					openEditDialog={this.openEditDialog}
-					closeEditDialog={this.closeEditDialog}
-					editNotebook={this.editNotebook}
-					stateNotebook={this.state.editNotebook}
-					openDeleteDialog={this.openDeleteDialog}
-					closeDeleteDialog={this.closeDeleteDialog}
-					delNotebook={this.state.deleteNotebook}
-					deleteNotebook={this.deleteNotebook}
-					deleteState={this.state.openDeleteDialog}
-				/>
-			</div>
+			<Router>
+				<div className="App">
+					<NavBar
+						openState={this.state.openAddNotebookDialog}
+						close={this.closeModal}
+						addNotebook={this.addNotebook}
+						open={this.openModal}
+					/>
+					<Switch>
+						<Route
+							path="/"
+							exact
+							component={() => (
+								<Home
+									notebooks={this.state.notebooks}
+									editState={this.state.openEditDialog}
+									openEditDialog={this.openEditDialog}
+									closeEditDialog={this.closeEditDialog}
+									editNotebook={this.editNotebook}
+									stateNotebook={this.state.editNotebook}
+									openDeleteDialog={this.openDeleteDialog}
+									closeDeleteDialog={this.closeDeleteDialog}
+									delNotebook={this.state.deleteNotebook}
+									deleteNotebook={this.deleteNotebook}
+									deleteState={this.state.openDeleteDialog}
+								/>
+							)}
+						/>
+						<Route path="/notebook/:id" component={Notes} />
+					</Switch>
+				</div>
+			</Router>
 		);
 	}
 }

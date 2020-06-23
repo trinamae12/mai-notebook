@@ -17,6 +17,8 @@ import styles from "../home/Home.styles";
 import EditNotebook from "./EditNotebook";
 import DeleteNotebook from "./DeleteNotebook";
 
+import { Link } from "react-router-dom";
+
 class Notebook extends Component {
 	render() {
 		const {
@@ -62,9 +64,11 @@ class Notebook extends Component {
 							</ButtonGroup>
 						</Box>
 						<CardContent className={classes.content}>
-							<Typography variant="h5">
-								{notebook.name}
-							</Typography>
+							<Link to={`/notebook/${notebook.id}`}>
+								<Typography variant="h5">
+									{notebook.name}
+								</Typography>
+							</Link>
 						</CardContent>
 					</Card>
 				</Grid>

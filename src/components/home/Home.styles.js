@@ -12,4 +12,8 @@ export default {
 	content: {
 		padding: 20,
 	},
+	navLink: {
+		color: "white",
+		textDecoration: "none",
+	},
 };
